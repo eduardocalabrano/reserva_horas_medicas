@@ -13,9 +13,18 @@ class Persona(models.Model):
 
 class Medico(Persona):
     especialidad = models.CharField(max_length=80)
+    foto_perfil = models.ImageField(upload_to='media/medicos', default='media/medicos/default.jpg')
+    OPCIONES_GENERO = [
+    ('F', 'Femenino'),
+    ('M','Masculino'),
+    ]
+    genero = models.CharField(max_length=20, choices=OPCIONES_GENERO, default='M')
 
     def __str__(self):
-        return('Dr.{} {} - {}'.format(self.nombre, self.apellidos, self.especialidad))
+        if self.genero == 'M':
+            return('Dr. {} {} - {}'.format(self.nombre, self.apellidos, self.especialidad))
+        else:
+            return('Dra. {} {} - {}'.format(self.nombre, self.apellidos, self.especialidad))
 
 class Paciente(Persona):
     fecha_nacimiento = models.DateField(blank=True, null=True)

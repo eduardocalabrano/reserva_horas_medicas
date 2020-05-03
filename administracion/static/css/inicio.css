@@ -1,0 +1,20 @@
+html, body {
+    height: 100%;
+    background-color:  #e8f8f5 ;
+}
+
+#principal{
+    /* background-color: aqua; */
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* width: 90%; */
+}
+#row_principal{
+    background-color: #7fb3d5 ;
+    border-radius: 15px;
+}
+
+#but_buscar{
+    margin-left: 1em;
+}

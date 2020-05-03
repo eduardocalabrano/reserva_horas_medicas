@@ -2,6 +2,7 @@
 *~
 __pycache__
 entorno_hm
+media
 db.sqlite3
 /static
 .DS_Store
