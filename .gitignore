@@ -1,0 +1,7 @@
+*.pyc
+*~
+__pycache__
+entorno_hm
+db.sqlite3
+/static
+.DS_Store
