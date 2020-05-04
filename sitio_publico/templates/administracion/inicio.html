@@ -1,0 +1,30 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row w-100" id="row_principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3>Hola!, ¿Que especialidad médica busca?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row col-md-8 offset-md-2">
+                <select class="form-control col-sm-9" id="exampleFormControlSelect1">
+                    <option>Medicina General</option>
+                </select>
+                <input class="btn btn-info col-sm-2" type="button" value="Buscar" id="but_buscar">
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block carga_css %}
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+{% endblock %}
+
+{% block titulo %}
+    Mi Clinica - Reserva de Horas
+{% endblock %}
+    
