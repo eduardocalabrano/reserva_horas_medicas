@@ -10,10 +10,12 @@
         </div>
         <div class="row">
             <div class="form-group row col-md-8 offset-md-2">
-                <select class="form-control col-sm-9" id="exampleFormControlSelect1">
-                    <option>Medicina General</option>
+                <select class="form-control col-sm-9" id="seleccion_especialidad">
+                    {% for detalle_especialidades in especialidades %}
+                    <option value="{{detalle_especialidades.id}}">{{detalle_especialidades.especialidad}}</option>
+                    {% endfor %}
                 </select>
-                <input class="btn btn-info col-sm-2" type="button" value="Buscar" id="but_buscar">
+                <a href="" class="col-sm-2" id="link_buscar"><input class="btn btn-info" type="button" value="Buscar" id="but_buscar"></a>
             </div>
         </div>
     </div>
@@ -27,4 +29,9 @@
 {% block titulo %}
     Mi Clinica - Reserva de Horas
 {% endblock %}
+
+{% block carga_js %}
+    <script src="{% static 'js/eventos_inicio.js' %}"></script>
+{% endblock %}
+
     
