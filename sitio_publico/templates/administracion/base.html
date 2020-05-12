@@ -12,29 +12,19 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Otros CSS -->
-    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
-    <title>Mi Clinica - Reserva de Horas</title>
+    {% block carga_css %}
+    {% endblock %}
+    
+    <title>
+        {% block titulo %}
+        {% endblock %}
+    </title>
 </head>
 
 <body>
     <div class="container h-100" id="principal">
-        <div class="row w-100" id="row_principal">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                        <h3>Hola!, ¿Que especialidad médica busca?</h3>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group row col-md-8 offset-md-2">
-                        <select class="form-control col-sm-9" id="exampleFormControlSelect1">
-                            <option>Medicina General</option>
-                        </select>
-                        <input class="btn btn-info col-sm-2" type="button" value="Buscar" id="but_buscar">
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
     </div>
 
     <!-- Optional JavaScript -->
@@ -48,6 +38,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <!-- Otros JS -->
+    {% block carga_js %}
+    {% endblock %}
 </body>
 
 </html>

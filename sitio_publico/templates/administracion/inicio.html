@@ -1,0 +1,37 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row w-100" id="row_principal">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h3>Hola!, ¿Que especialidad médica busca?</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group row col-md-8 offset-md-2">
+                <select class="form-control col-sm-9" id="seleccion_especialidad">
+                    <option value="" disabled selected>Seleccione especialidad</option>
+                    {% for detalle_especialidades in especialidades %}
+                    <!-- <option value="{{detalle_especialidades.id}}">{{detalle_especialidades.especialidad}}</option> -->
+                    <option value="">{{detalle_especialidades.especialidad}}</option>
+                    {% endfor %}
+                </select>
+                <a href="" class="col-sm-2" id="link_buscar"><input class="btn btn-info" type="button" value="Buscar" id="but_buscar"></a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block carga_css %}
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
+{% endblock %}
+
+{% block titulo %}
+    Mi Clinica - Reserva de Horas
+{% endblock %}
+
+{% block carga_js %}
+    <script src="{% static 'js/eventos_inicio.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'administracion/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <h3>Listado de médicos con especialidad en {{especialidad}}</h3>
+</div>
+<div class="row">
+    {% for medicos_filtrados in medicos %}
+    <div class="card tarjeta_medico" style="width: 14rem;">
+        <img src="{{ medicos_filtrados.foto_perfil.url }}" class="card-img-top" alt="...">
+        <!-- <img src="" class="card-img-top" alt=""> -->
+        <div class="card-body">
+          <h5 class="card-title">
+          {% if medicos_filtrados.genero == 'F' %}
+            Dra.
+          {% else %}
+            Dr.
+          {% endif %}
+          {{medicos_filtrados.nombre}} {{medicos_filtrados.apellidos}}</h5>
+          <p class="card-text">{{medicos_filtrados.especialidad}}</p>
+          <a href="#" class="btn btn-primary">Solicitar hora</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block titulo %}
+    Mi Clinica - Profesionales
+{% endblock %}
+
+{% block carga_css %}
+    <link rel="stylesheet" href="{% static 'css/medicos.css' %}">
+{% endblock %}

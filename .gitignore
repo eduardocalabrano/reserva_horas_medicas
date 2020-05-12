@@ -1,7 +1,7 @@
 *.pyc
 *~
 __pycache__
-entorno_hm
+ent_reservahoras
 media
 db.sqlite3
 /static
