@@ -13,7 +13,7 @@ class Persona(models.Model):
 
 class Medico(Persona):
     especialidad = models.CharField(max_length=80)
-    foto_perfil = models.ImageField(upload_to='media/medicos', default='media/medicos/default.jpg')
+    foto_perfil = models.ImageField(upload_to='medicos', default='medicos/default.jpg')
     OPCIONES_GENERO = [
     ('F', 'Femenino'),
     ('M','Masculino'),

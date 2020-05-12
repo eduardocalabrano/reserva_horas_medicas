@@ -2,75 +2,26 @@
 {% load static %}
 {% block content %}
 <div class="row">
-    <h3>Listado de médicos con especialidad en COSA</h3>
+    <h3>Listado de médicos con especialidad en {{especialidad}}</h3>
 </div>
 <div class="row">
+    {% for medicos_filtrados in medicos %}
     <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
+        <img src="{{ medicos_filtrados.foto_perfil.url }}" class="card-img-top" alt="...">
+        <!-- <img src="" class="card-img-top" alt=""> -->
         <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
+          <h5 class="card-title">
+          {% if medicos_filtrados.genero == 'F' %}
+            Dra.
+          {% else %}
+            Dr.
+          {% endif %}
+          {{medicos_filtrados.nombre}} {{medicos_filtrados.apellidos}}</h5>
+          <p class="card-text">{{medicos_filtrados.especialidad}}</p>
+          <a href="#" class="btn btn-primary">Solicitar hora</a>
         </div>
     </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
-    <div class="card" style="width: 16rem;">
-        <img src="" class="card-img-top" alt="">
-        <div class="card-body">
-            <h5 class="card-title">Dr. Nombre Apellidos</h5>
-            <p class="card-text">Médico COSA</p>
-            <a href="#" class="btn btn-primary">Solicitar hora</a>
-        </div>
-    </div>
+    {% endfor %}
 </div>
 {% endblock %}
 
