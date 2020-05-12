@@ -3,3 +3,12 @@ html, body {
     background-color:  #e8f8f5 ;
 }
 
+.card-img-top{
+  max-height: 13em;
+  max-width: 14em;
+}
+
+.tarjeta_medico{
+  margin-right: 1%;
+  margin-top: 1%;
+}
