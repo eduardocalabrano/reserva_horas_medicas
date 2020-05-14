@@ -37,14 +37,16 @@ class Cita_medica(models.Model):
     hora_inicio_cita = models.TimeField()
     hora_fin_cita = models.TimeField()
     OPCIONES_ESTADO_CITA = [
-    ('SOL', 'Solicitada'),
+    ('DIS', 'Disponible'),
+    ('SEL', 'Seleccionada'),
+    ('RES', 'Reservada'),
     ('CONF','Confirmada'),
     ('ANUL', 'Anulada'),
     ('REA', 'Realizada'),
     ]
-    estado_cita = models.CharField(max_length=20, choices=OPCIONES_ESTADO_CITA, default='SOL')
+    estado_cita = models.CharField(max_length=20, choices=OPCIONES_ESTADO_CITA, default='DIS')
     medico = models.ForeignKey('Medico', on_delete=models.CASCADE)
-    paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE)
+    paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return('Médico: {} | Paciente: {} | Fecha: {} | Hora: {}'.format(self.medico, self.paciente, self.fecha_cita, self.hora_inicio_cita))
