@@ -4,5 +4,6 @@ from . import views
 urlpatterns = [
     path('', views.inicio, name='inicio'),
     path('medicos/<esp>/', views.listar_medicos, name='listar_medicos'),
-    path('ajax/retorna_horasdisponibles/', views.horas_disponibles, name='horas_disponibles'),
+    path('ajax/fechas_disponibles/', views.fechas_disponibles, name='fechas_disponibles'),
+    path('ajax/horas_disponibles/', views.horas_disponibles, name='horas_disponibles'),
 ]

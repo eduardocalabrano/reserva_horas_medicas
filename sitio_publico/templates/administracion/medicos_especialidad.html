@@ -28,7 +28,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Reserva de Hora - <span id="span_medico"> - </span></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cierre_modal">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -37,18 +37,14 @@
           <h4>Agenda Disponible</h4>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Fecha:</label>
-             <select class="form-control" id="exampleFormControlSelect1">
-               <option value="">Lun 30 - 05</option>
-               <option value="">Mar 31 - 05</option>
-               <option value="">Mie 01 - 06</option>
+             <select class="form-control" id="select_fecha_medico">
+               <option selected="selected" value="0" disabled>Seleccione Fecha</option>
              </select>
           </div>
           <div class="form-group">
             <label for="exampleFormControlSelect1">Hora:</label>
-             <select class="form-control" id="exampleFormControlSelect1">
-               <option value="">08:00 - 08:25</option>
-               <option value="">08:30 - 08:55</option>
-               <option value="">09:00 - 09:25</option>
+             <select class="form-control" id="select_hora_medico">
+               <option value="0" selected disabled>-- : --</option>
              </select>
           </div>
           <hr>
@@ -77,7 +73,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar_modal">Cancelar</button>
         <button type="button" class="btn btn-primary bot_confirma_reserva">Confirmar Reserva</button>
       </div>
     </div>

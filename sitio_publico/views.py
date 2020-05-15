@@ -12,20 +12,13 @@ def listar_medicos(request, esp):
     lista_medicos = Medico.objects.all().filter(especialidad = esp)
     return render(request, 'administracion/medicos_especialidad.html', {'medicos': lista_medicos, 'especialidad': esp})
 
-def horas_disponibles(request):
+def fechas_disponibles(request):
     id_medico = request.GET.get('id', None)
-    horariosdisponibles = Cita_medica.objects.all().filter(medico = id_medico)
-    # data = []
-    # for x in horariosdisponibles:
-    #     # datos_horario = {
-    #     #     'fecha' : x['fecha_cita'],
-    #     #     'inicio' : x['hora_inicio_cita'],
-    #     #     'fin' : x['hora_fin_cita'],
-    #     # }
-    #     datos_horario = {
-    #         'numero' : x
-    #     }
-    #     data.append(datos_horario)
-    # EN VEZ DE RETORNAR UN JSON PUEDO RETORNAR TODA LA INFORMACION NECESARIA PARA EL SELECT DE FECHAS
-    data = [{'nombre': 'Alonso'},{'nombre': 'Juan'}] #Solo de ejemplo
+    data = list(Cita_medica.objects.values('fecha_cita').annotate(Count('fecha_cita')).filter(medico = id_medico).order_by('fecha_cita'))
+    return JsonResponse(data, safe=False)
+
+def horas_disponibles(request):
+    fecha_buscar = request.GET.get('fecha_buscar', None)
+    id_medico = request.GET.get('id_medico', None)
+    data = list(Cita_medica.objects.values('id', 'hora_inicio_cita', 'hora_fin_cita').filter(fecha_cita = fecha_buscar, medico = id_medico))
     return JsonResponse(data, safe=False)
