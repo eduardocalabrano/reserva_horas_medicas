@@ -19,7 +19,7 @@ $(document).ready(function() {
             fecha.setDate(fecha.getDate() + 1);
             const dayName = dias_sigla[fecha.getDay()];
             if(fecha.getMonth() < 10){
-              mes = '0'+(fecha.getMonth() + 1);
+              mes = '0'+(fecha.getMonth() + 1); //Se agrega el 0 para números de 1 solo dígito. ¿Existe una forma más automática?
             }else{
               mes = (fecha.getMonth() + 1);
             }
@@ -56,11 +56,37 @@ $(document).ready(function() {
       });
   });
 
+  $(".bot_confirma_reserva").click(function() {
+
+    // let fech = $("#select_fecha_medico option:selected").val();
+    let hor = $("#select_hora_medico option:selected").val();
+    let rut = $("#rut_paciente").val();
+    let nom = $("#nombre_paciente").val();
+    let ape = $("#apellidos_paciente").val();
+    let fon = $("#telefono_paciente").val();
+    let ema = $("#email_paciente").val();
+    console.log('rut : '+rut);
+
+    $.ajax({ //Cada vez que se cambia la fecha seleccionada se consultan las horas disponibles.
+        url: '/ajax/ingresa_paciente/',
+        data: {
+          'id_hora': hor,
+          'rut': rut,
+          'nom': nom,
+          'ape': ape,
+          'fon': fon,
+          'ema': ema
+        },
+        dataType: 'json',
+        success: function (data) {
+          console.log(data);
+        }
+    });
+  });
+
 });
 
-$(".bot_confirma_reserva").click(function() {
-  console.log('La reserva se confirma');
-});
+
 
 $("#cierre_modal, #cancelar_modal").click(function() {
   // Cuando se cierra el modal es necesario limpiar los datos relacionados al modal
