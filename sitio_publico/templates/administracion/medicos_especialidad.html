@@ -10,7 +10,7 @@
         <img src="{{ medicos_filtrados.foto_perfil.url }}" class="card-img-top" alt="...">
         <!-- <img src="" class="card-img-top" alt=""> -->
         <div class="card-body">
-          <h5 class="card-title">
+          <h5 class="card-title" id="card_title_med_{{medicos_filtrados.id}}">
           {% if medicos_filtrados.genero == 'F' %}
             Dra.
           {% else %}
@@ -18,12 +18,70 @@
           {% endif %}
           {{medicos_filtrados.nombre}} {{medicos_filtrados.apellidos}}</h5>
           <p class="card-text">{{medicos_filtrados.especialidad}}</p>
-          <a href="#" class="btn btn-primary">Solicitar hora</a>
+          <a href="#" data-med="{{medicos_filtrados.id}}" class="btn btn-primary solhora" data-toggle="modal" data-target="#staticBackdrop" id="but_reserva_med_{{medicos_filtrados.id}}">Solicitar hora</a>
         </div>
     </div>
     {% endfor %}
 </div>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Reserva de Hora - <span id="span_medico"> - </span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="cierre_modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <h4>Agenda Disponible</h4>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Fecha:</label>
+             <select class="form-control" id="select_fecha_medico">
+               <option selected="selected" value="0" disabled>Seleccione Fecha</option>
+             </select>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">Hora:</label>
+             <select class="form-control" id="select_hora_medico">
+               <option value="0" selected disabled>-- : --</option>
+             </select>
+          </div>
+          <hr>
+          <h4>Datos Paciente</h4>
+          <div class="form-group">
+            <label for="exampleInputEmail1">RUT</label>
+            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="N° de RUT" id="rut_paciente">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nombre</label>
+            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="Su nombre" id="nombre_paciente">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Apellidos</label>
+            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="Apellidos" id="apellidos_paciente">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Teléfono</label>
+            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="N° telefonico" id="telefono_paciente">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="email" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="email@dominio.com" id="email_paciente">
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar_modal">Cancelar</button>
+        <button type="button" class="btn btn-primary bot_confirma_reserva">Confirmar Reserva</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
+
 
 {% block titulo %}
     Mi Clinica - Profesionales
@@ -31,4 +89,8 @@
 
 {% block carga_css %}
     <link rel="stylesheet" href="{% static 'css/medicos.css' %}">
+{% endblock %}
+
+{% block carga_js %}
+    <script src="{% static 'js/eventos_listado_especialidad.js' %}"></script>
 {% endblock %}
