@@ -47,6 +47,7 @@ class Cita_medica(models.Model):
     estado_cita = models.CharField(max_length=20, choices=OPCIONES_ESTADO_CITA, default='DIS')
     medico = models.ForeignKey('Medico', on_delete=models.CASCADE)
     paciente = models.ForeignKey('Paciente', on_delete=models.CASCADE, blank=True, null=True)
+    fecha_actualizacion = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return('Médico: {} | Paciente: {} | Fecha: {} | Hora: {}'.format(self.medico, self.paciente, self.fecha_cita, self.hora_inicio_cita))

@@ -42,17 +42,33 @@ def ingresa_paciente(request):
     ape_paciente = request.GET.get('ape', None)
     fon_paciente = request.GET.get('fon', None)
     ema_paciente = request.GET.get('ema', None)
-    data_paciente = Paciente.objects.all().filter(rut=rut_paciente)
+    now = timezone.localtime(timezone.now())
+    # data_paciente = Paciente.objects.values('id').filter(rut=rut_paciente).first()
+    try:
+        data_paciente = Paciente.objects.get(rut=rut_paciente) #al usar get si no hay resultado se retorna un DoesNotExist
+    except Paciente.DoesNotExist:
+        data_paciente = None
     if not data_paciente:
-        # objects.create no sirve para la vista. Es necesario investigar más sobre como instanciar un modelo en la vista.
-        # https://docs.djangoproject.com/en/3.0/ref/models/instances/
+        '''
+        Paciente no existe previamente en la base de datos, debe crearse como primer paso.
+        '''
+        nuevo_paciente = Paciente(rut=rut_paciente, nombre=nom_paciente, apellidos=ape_paciente, telefono=fon_paciente, email=ema_paciente)
+        nuevo_paciente.save()
+        obj = Cita_medica.objects.get(id=id_hora)
+        obj.paciente = nuevo_paciente
+        obj.estado_cita = 'RES'
+        obj.fecha_actualizacion = now
+        obj.save()
         data = {
-            'respuesta': 'sin datos para el rut',
-            'rut':rut_paciente,
+            'respuesta': 'paciente y reserva creados exitosamente',
         }
     else:
+        obj = Cita_medica.objects.get(id=id_hora)
+        obj.paciente = data_paciente
+        obj.estado_cita = 'RES'
+        obj.fecha_actualizacion = now
+        obj.save()
         data = {
-            'respuesta': 'paciente ya existe en BD',
-            'rut':rut_paciente,
+            'respuesta': 'reserva realizada',
         }
     return JsonResponse(data, safe=False)

@@ -57,8 +57,6 @@ $(document).ready(function() {
   });
 
   $(".bot_confirma_reserva").click(function() {
-
-    // let fech = $("#select_fecha_medico option:selected").val();
     let hor = $("#select_hora_medico option:selected").val();
     let rut = $("#rut_paciente").val();
     let nom = $("#nombre_paciente").val();
@@ -86,11 +84,10 @@ $(document).ready(function() {
 
 });
 
-
-
 $("#cierre_modal, #cancelar_modal").click(function() {
   // Cuando se cierra el modal es necesario limpiar los datos relacionados al modal
   $('#select_fecha_medico').empty().append('<option selected="selected" value="0" disabled>Seleccione Fecha</option>');
   $('#select_hora_medico').empty().append('<option value="0" selected disabled>-- : --</option>');
+  $(".dato_paciente").val(''); //Se limpian los campos con los datos del paciente
   id_medico = '';
 });
