@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  $('.alerta_formulario_reserva').hide();
   let id_medico = '';
   $(".solhora").click(function() {
     //Se abrió el modal con el formulario para solicitar una hora médica
@@ -57,28 +58,33 @@ $(document).ready(function() {
   });
 
   $(".bot_confirma_reserva").click(function() {
-    let hor = $("#select_hora_medico option:selected").val();
-    let rut = $("#rut_paciente").val();
-    let nom = $("#nombre_paciente").val();
-    let ape = $("#apellidos_paciente").val();
-    let fon = $("#telefono_paciente").val();
-    let ema = $("#email_paciente").val();
-    console.log('rut : '+rut);
+    validar_datos_form_reserva().then(function(result) {
+      // console.log(result);
+      let hor = $("#select_hora_medico option:selected").val();
+      let rut = $("#rut_paciente").val();
+      let nom = $("#nombre_paciente").val();
+      let ape = $("#apellidos_paciente").val();
+      let fon = $("#telefono_paciente").val();
+      let ema = $("#email_paciente").val();
+      // console.log('rut : '+rut);
 
-    $.ajax({ //Cada vez que se cambia la fecha seleccionada se consultan las horas disponibles.
-        url: '/ajax/ingresa_paciente/',
-        data: {
-          'id_hora': hor,
-          'rut': rut,
-          'nom': nom,
-          'ape': ape,
-          'fon': fon,
-          'ema': ema
-        },
-        dataType: 'json',
-        success: function (data) {
-          console.log(data);
-        }
+      $.ajax({ //Cada vez que se cambia la fecha seleccionada se consultan las horas disponibles.
+          url: '/ajax/ingresa_paciente/',
+          data: {
+            'id_hora': hor,
+            'rut': rut,
+            'nom': nom,
+            'ape': ape,
+            'fon': fon,
+            'ema': ema
+          },
+          dataType: 'json',
+          success: function (data) {
+            console.log(data);
+          }
+      });
+    }, function(err) {
+      console.log(err); // Error: "It broke"
     });
   });
 
@@ -89,5 +95,6 @@ $("#cierre_modal, #cancelar_modal").click(function() {
   $('#select_fecha_medico').empty().append('<option selected="selected" value="0" disabled>Seleccione Fecha</option>');
   $('#select_hora_medico').empty().append('<option value="0" selected disabled>-- : --</option>');
   $(".dato_paciente").val(''); //Se limpian los campos con los datos del paciente
+  $('.alerta_formulario_reserva').hide(); //Se ocultan las advertencias
   id_medico = '';
 });

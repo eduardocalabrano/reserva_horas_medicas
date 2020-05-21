@@ -36,40 +36,46 @@
         <form>
           <h4>Agenda Disponible</h4>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Fecha:</label>
+            <label for="select_fecha_medico">Fecha:</label>
              <select class="form-control" id="select_fecha_medico">
                <option selected="selected" value="0" disabled>Seleccione Fecha</option>
              </select>
+             <small id="alerta_select_fecha" class="form-text text-danger alerta_formulario_reserva">Es necesario que escoja una fecha de consulta</small>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Hora:</label>
+            <label for="select_hora_medico">Hora:</label>
              <select class="form-control" id="select_hora_medico">
                <option value="0" selected disabled>-- : --</option>
              </select>
+             <small id="alerta_select_hora" class="form-text text-danger alerta_formulario_reserva">Es necesario que escoja un horario de consulta</small>
           </div>
           <hr>
           <h4>Datos Paciente</h4>
           <div class="form-group">
-            <label for="exampleInputEmail1">RUT</label>
-            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="N° de RUT" id="rut_paciente">
+            <label for="rut_paciente">RUT</label>
+            <input type="text" class="form-control dato_paciente" placeholder="N° de RUT" id="rut_paciente">
+            <small id="alerta_rut" class="form-text text-danger alerta_formulario_reserva">Ingrese un rut válido</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Nombre</label>
-            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="Su nombre" id="nombre_paciente">
+            <label for="nombre_paciente">Nombre</label>
+            <input type="text" class="form-control dato_paciente" placeholder="Su nombre" id="nombre_paciente">
+            <small id="alerta_nombre" class="form-text text-danger alerta_formulario_reserva">Ingrese su nombre</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Apellidos</label>
-            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="Apellidos" id="apellidos_paciente">
+            <label for="apellidos_paciente">Apellidos</label>
+            <input type="text" class="form-control dato_paciente" placeholder="Apellidos" id="apellidos_paciente">
+            <small id="alerta_apellidos" class="form-text text-danger alerta_formulario_reserva">Ingrese al menos un apellido</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Teléfono</label>
-            <input type="text" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="N° telefonico" id="telefono_paciente">
+            <label for="telefono_paciente">Teléfono</label>
+            <input type="text" class="form-control dato_paciente" placeholder="N° telefonico" id="telefono_paciente">
+            <small id="alerta_telefono" class="form-text text-danger alerta_formulario_reserva">Ingrese su número de teléfono</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email</label>
-            <input type="email" class="form-control dato_paciente" aria-describedby="emailHelp" placeholder="email@dominio.com" id="email_paciente">
+            <label for="email_paciente">Email</label>
+            <input type="email" class="form-control dato_paciente" placeholder="email@dominio.com" id="email_paciente">
+            <small id="alerta_email" class="form-text text-danger alerta_formulario_reserva">Ingrese su dirección de email</small>
           </div>
-
         </form>
       </div>
       <div class="modal-footer">
@@ -92,5 +98,6 @@
 {% endblock %}
 
 {% block carga_js %}
-    <script src="{% static 'js/eventos_listado_especialidad.js' %}"></script>
+<script src="{% static 'js/eventos_listado_especialidad.js' %}"></script>
+<script src="{% static 'js/validar_datos_form_reserva.js' %}"></script>
 {% endblock %}
