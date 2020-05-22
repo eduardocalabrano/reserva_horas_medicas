@@ -37,14 +37,14 @@
           <h4>Agenda Disponible</h4>
           <div class="form-group">
             <label for="select_fecha_medico">Fecha:</label>
-             <select class="form-control" id="select_fecha_medico">
+             <select class="form-control dato_paciente" id="select_fecha_medico">
                <option selected="selected" value="0" disabled>Seleccione Fecha</option>
              </select>
              <small id="alerta_select_fecha" class="form-text text-danger alerta_formulario_reserva">Es necesario que escoja una fecha de consulta</small>
           </div>
           <div class="form-group">
             <label for="select_hora_medico">Hora:</label>
-             <select class="form-control" id="select_hora_medico">
+             <select class="form-control dato_paciente" id="select_hora_medico">
                <option value="0" selected disabled>-- : --</option>
              </select>
              <small id="alerta_select_hora" class="form-text text-danger alerta_formulario_reserva">Es necesario que escoja un horario de consulta</small>
@@ -78,9 +78,25 @@
           </div>
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelar_modal">Cancelar</button>
-        <button type="button" class="btn btn-primary bot_confirma_reserva">Confirmar Reserva</button>
+      <div class="modal-footer" id="footer_botones">
+        <button type="button" class="btn btn-secondary btn_modal" data-dismiss="modal" id="cancelar_modal">Cancelar</button>
+        <button type="button" class="btn btn-primary bot_confirma_reserva btn_modal">Confirmar Reserva</button>
+      </div>
+      <div class="modal-footer" id="footer_respuesta_ok">
+        <div class="alert alert-success" role="alert">
+          <h5 class="alert-heading">Reserva exitosa</h5>
+          <p>La hora médica a sido reservada exitosamente. Recibirá mas detalles en su dirección de email.</p>
+          <hr>
+          <button type="button" class="btn btn-success btn_cierre_modal" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      <div class="modal-footer" id="footer_respuesta_error">
+        <div class="alert alert-danger" role="alert">
+          <h5 class="alert-heading">¡Error!</h5>
+          <p>Algo salió mal y su reserva no se concretó exitosamente. Por favor intente más tarde</p>
+          <hr>
+          <button type="button" class="btn btn-danger btn_cierre_modal" data-dismiss="modal">Cerrar</button>
+        </div>
       </div>
     </div>
   </div>
