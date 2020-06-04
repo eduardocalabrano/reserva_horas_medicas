@@ -88,12 +88,15 @@ $(document).ready(function() {
             // Reserva registrada correctamente
             $('#footer_botones').hide();
             $('#footer_respuesta_ok').show();
+          },
+          error: function(){
+            $('#footer_botones').hide();
+            $('#footer_respuesta_error').show();
           }
       });
     }, function(err) {
-      // Algo salió mal con el registro de la reserva.
-      $('#footer_botones').hide();
-      $('#footer_respuesta_error').show();
+      //El proceso de validación alertó de uno o mas campos con error.
+
     });
   });
 

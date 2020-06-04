@@ -3,7 +3,8 @@ from django.views.generic import ListView
 from django.http import JsonResponse
 from administracion.models import Medico, Cita_medica, Paciente
 from django.db.models import Count
-from django.utils import timezone
+from django.utils import timezone, dateformat
+from django.core.mail import EmailMessage
 
 def inicio(request):
     lista_especialidades = Medico.objects.values('especialidad').annotate(Count('especialidad')).order_by('especialidad')
@@ -29,10 +30,16 @@ def horas_disponibles(request):
     Los horarios no pueden ser inferior a la hora en curso y muestra solo horarios con hora de inicio minimo 29 minutos
     despues del horario en que se consulta.
     '''
-    now = timezone.localtime(timezone.now())  + timezone.timedelta(minutes=29) #se obtiene la hora de la fecha actual
-    fecha_buscar = request.GET.get('fecha_buscar', None)
     id_medico = request.GET.get('id_medico', None)
-    data = list(Cita_medica.objects.values('id', 'hora_inicio_cita', 'hora_fin_cita').filter(fecha_cita = fecha_buscar, medico = id_medico, hora_inicio_cita__gte = now.time()).order_by('hora_inicio_cita'))
+
+    fecha_buscar = request.GET.get('fecha_buscar', None)
+    hoy = dateformat.format(timezone.localtime(timezone.now()), 'Y-m-d')
+
+    if(fecha_buscar == hoy):
+        now = timezone.localtime(timezone.now())  + timezone.timedelta(minutes=29) #se obtiene la hora de la fecha actual
+        data = list(Cita_medica.objects.values('id', 'hora_inicio_cita', 'hora_fin_cita').filter(fecha_cita = fecha_buscar, medico = id_medico, hora_inicio_cita__gte = now.time()).order_by('hora_inicio_cita'))
+    else:
+        data = list(Cita_medica.objects.values('id', 'hora_inicio_cita', 'hora_fin_cita').filter(fecha_cita = fecha_buscar, medico = id_medico).order_by('hora_inicio_cita'))
     return JsonResponse(data, safe=False)
 
 def ingresa_paciente(request):
@@ -62,6 +69,14 @@ def ingresa_paciente(request):
         data = {
             'respuesta': 'paciente y reserva creados exitosamente',
         }
+        # email_message = EmailMessage(
+        #     subject='Paciencte creado y hora reservada',
+        #     body='Un correo desde django',
+        #     from_email='edcalabr@gmail.com',
+        #     to=['ecalabrano.beltran@gmail.com'],
+        # )
+        # email_message.content_subtype = 'html'
+        # email_message.send()
     else:
         obj = Cita_medica.objects.get(id=id_hora)
         obj.paciente = data_paciente
@@ -71,4 +86,12 @@ def ingresa_paciente(request):
         data = {
             'respuesta': 'reserva realizada',
         }
+        # email_message = EmailMessage(
+        #     subject='Hora reservada',
+        #     body='Un correo desde django :)',
+        #     from_email='edcalabr@gmail.com',
+        #     to=['ecalabrano.beltran@gmail.com'],
+        # )
+        # email_message.content_subtype = 'html'
+        # email_message.send()
     return JsonResponse(data, safe=False)
