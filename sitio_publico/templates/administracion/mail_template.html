@@ -1,0 +1,36 @@
+{% load static %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- <link rel="stylesheet" href="{% static 'css/email_estilo.css' %}"> -->
+</head>
+<body>
+  <body style='margin: 0; padding: 0;'>
+  <table align='center' border='1' cellpadding='0' cellspacing='0' width='600' style='border-collapse: collapse; border-color: #70bbd9;'>
+    <tr style=" border-color: #70bbd9;">
+      <td align='center' bgcolor='#ffffff' style='padding: 5px 0 5px 0;'>
+        <img src="https://i.ibb.co/F7Vfszq/clinica-miskatonic-logo.png" style='display: block;' />
+        <!-- <h1>Logo Clinica</h1> -->
+      </td>
+    </tr>
+    <tr style="border-color: #70bbd9;">
+      <td bgcolor='#ffffff' style='padding: 40px 30px 40px 30px; font-family: Arial, sans-serif; border-color: #70bbd9;'>
+      <p>Estimado(a), <b>{{paciente_nombre}} {{paciente_apellido}}</b></p>
+      <p>Usted ha reservado exitosamente una hora con {{med_data}}, para el día {{fecha}} a las {{hora}} horas.</p>
+      <p>La Clínica está ubicada en Avenida Su nombre #123, Santiago</p>
+      <p>En caso de no poder asistir, le ruego responderme en este mail para que su hora pueda ser reagendada a otro paciente.</p>
+      </td>
+    </tr>
+    <tr style="border-color: #70bbd9;">
+      <td bgcolor='#70bbd9' style='font-family: Arial, sans-serif; padding: 30px 30px 30px 30px;'>
+      <font color='#ffffff'><b>Más información en <a href='#' style='color: #ffffff;'><font color='#ffffff'>www.clinica-miskatonic.cl</font></a></b></font>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+{% endblock %}

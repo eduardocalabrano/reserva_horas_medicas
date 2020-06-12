@@ -1,5 +1,8 @@
 $(document).ready(function() {
   $('.alerta_formulario_reserva').hide();
+  $('#footer_respuesta_ok').hide();
+  $('#footer_respuesta_error').hide();
+
   let id_medico = '';
   $(".solhora").click(function() {
     //Se abrió el modal con el formulario para solicitar una hora médica
@@ -44,7 +47,6 @@ $(document).ready(function() {
           },
           dataType: 'json',
           success: function (data) {
-            // console.log(data);
             data.forEach(el => {
               //Por el momento usaré un split para eliminar los segundos de las hora de inicio y término.
               let inicio_descompuesta = el['hora_inicio_cita'].split(":");
@@ -59,16 +61,19 @@ $(document).ready(function() {
 
   $(".bot_confirma_reserva").click(function() {
     validar_datos_form_reserva().then(function(result) {
-      // console.log(result);
+      //La validación de los datos está correcta por lo que se procede a generar la reserva
+      $(".dato_paciente").prop( "disabled", true );
+      $(".btn_modal").prop( "disabled", true );
+      $(".bot_confirma_reserva").html('<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Espere...')
+
       let hor = $("#select_hora_medico option:selected").val();
       let rut = $("#rut_paciente").val();
       let nom = $("#nombre_paciente").val();
       let ape = $("#apellidos_paciente").val();
       let fon = $("#telefono_paciente").val();
       let ema = $("#email_paciente").val();
-      // console.log('rut : '+rut);
 
-      $.ajax({ //Cada vez que se cambia la fecha seleccionada se consultan las horas disponibles.
+      $.ajax({
           url: '/ajax/ingresa_paciente/',
           data: {
             'id_hora': hor,
@@ -80,21 +85,41 @@ $(document).ready(function() {
           },
           dataType: 'json',
           success: function (data) {
-            console.log(data);
+            // Reserva registrada correctamente
+            $('#footer_botones').hide();
+            $('#footer_respuesta_ok').show();
+          },
+          error: function(){
+            $('#footer_botones').hide();
+            $('#footer_respuesta_error').show();
           }
       });
     }, function(err) {
-      console.log(err); // Error: "It broke"
+      //El proceso de validación alertó de uno o mas campos con error.
+
     });
   });
 
 });
 
-$("#cierre_modal, #cancelar_modal").click(function() {
-  // Cuando se cierra el modal es necesario limpiar los datos relacionados al modal
+$("#cierre_modal, #cancelar_modal, .btn_cierre_modal").click(function() {
+  //Acciones necesarias para limpiar el formulario del modal.
+  // 1.- Ocultar mensajes de respuesta y volver a mostrar botones.
+  $('#footer_respuesta_ok').hide();
+  $('#footer_respuesta_error').hide();
+  $('#footer_botones').show();
+  // 2.- Quitar el mensaje de "Espere..."
+  $(".bot_confirma_reserva").html('Confirmar Reserva');
+  // 3.- Habilitar campos y botones de acción
+  $(".dato_paciente").prop( "disabled", false );
+  $(".btn_modal").prop( "disabled", false );
+  // 4.- Dejar inputs vacíos
+  $(".dato_paciente").val('');
+  // 5.- Eliminar opciones de fecha y hora de médico consultado
   $('#select_fecha_medico').empty().append('<option selected="selected" value="0" disabled>Seleccione Fecha</option>');
   $('#select_hora_medico').empty().append('<option value="0" selected disabled>-- : --</option>');
-  $(".dato_paciente").val(''); //Se limpian los campos con los datos del paciente
-  $('.alerta_formulario_reserva').hide(); //Se ocultan las advertencias
+  // 6.- Ocultar mensajes de alertas de los campos mal ingresados o con datos faltantes
+  $('.alerta_formulario_reserva').hide();
+  // 7.- Eliminar ID de médico consultado previamente
   id_medico = '';
 });
