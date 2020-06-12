@@ -67,12 +67,15 @@ def ingresa_paciente(request):
         obj.paciente = nuevo_paciente
         obj.estado_cita = 'RES'
         obj.fecha_actualizacion = now
+        medico_data = obj.medico
+        fecha_data = obj.fecha_cita
+        hora_data = obj.hora_inicio_cita
         obj.save()
         data = {
             'respuesta': 'paciente y reserva creados exitosamente',
         }
-        html_message = render_to_string('administracion/mail_template.html', {})
-        mensaje = 'ekisde'
+        html_message = render_to_string('administracion/mail_template.html', {'paciente_nombre': nom_paciente, 'paciente_apellido': ape_paciente, 'med_data': medico_data, 'fecha': fecha_data, 'hora': hora_data})
+        mensaje = ''
         send_mail('Aviso de reserva de hora médica',mensaje,'ecalabra.dev@gmail.com',[ema_paciente],fail_silently=False, html_message=html_message)
     else:
         obj = Cita_medica.objects.get(id=id_hora)
@@ -84,6 +87,6 @@ def ingresa_paciente(request):
             'respuesta': 'reserva realizada',
         }
         html_message = render_to_string('administracion/mail_template.html', {'paciente_nombre': nom_paciente, 'paciente_apellido': ape_paciente})
-        mensaje = 'ekisde'
+        mensaje = ''
         send_mail('Aviso de reserva de hora médica',mensaje,'ecalabra.dev@gmail.com',[ema_paciente],fail_silently=False, html_message=html_message)
     return JsonResponse(data, safe=False)

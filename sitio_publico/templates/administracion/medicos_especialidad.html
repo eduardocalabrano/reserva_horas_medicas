@@ -1,8 +1,12 @@
 {% extends 'administracion/base.html' %}
 {% load static %}
 {% block content %}
-<div class="row">
-    <h3>Listado de médicos con especialidad en {{especialidad}}</h3>
+<div class="row justify-content-center" id="div_logo">
+  <img src="{% static 'clinica_miskatonic_logo.png' %}" alt="">
+</div>
+<div class="row justify-content-center">
+
+    <h4>{{especialidad}}</h4>
 </div>
 <div class="row">
     {% for medicos_filtrados in medicos %}
