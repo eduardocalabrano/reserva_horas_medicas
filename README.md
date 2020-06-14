@@ -40,7 +40,7 @@ python manage.py runserver
 
 ## Capturas
 
-![](http://s2.subirimagenes.com/imagen/previo/thump_9926591001.png)
-![](http://s2.subirimagenes.com/imagen/previo/thump_9926592002.png)
-![](http://s2.subirimagenes.com/imagen/previo/thump_9926593005.png)
-![](http://s2.subirimagenes.com/imagen/previo/thump_9926594007.png)
+![](https://i.postimg.cc/x1t1WZfj/001.png)
+![](https://i.postimg.cc/N0FjYxF6/002.png)
+![](https://i.postimg.cc/k5HX5tRk/005.png)
+![](https://i.postimg.cc/C1fMnLjd/007.png)
